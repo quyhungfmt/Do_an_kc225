@@ -1,0 +1,66 @@
+import { StyleSheet } from "react-native";
+
+
+export const styles = StyleSheet.create({
+
+    buttonAdd: {
+        // backgroundColor:'#377dbe',
+        justifyContent:'center',
+        alignItems:'center',
+        position:'absolute',
+        bottom:120,
+        right:30,
+        // elevation:15,
+        // borderColor:'white',
+        // shadowOffset: { height: 5, width: 1}, 
+        // shadowOpacity:1,
+        // shadowRadius:20,
+        // shadowColor:'black',
+        // borderLeftWidth:1,
+        // borderRightWidth:1,
+        // borderBottomWidth:5,
+        borderRadius:50,
+      },
+      InputAdd: {
+        backgroundColor:'#fff',
+        width:"90%",
+        height:50,
+        borderRadius:10,
+        borderWidth:1,
+        shadowOffset: { height: 5, width: 1 }, 
+        shadowOpacity:1,
+        shadowRadius:20,
+        shadowColor:'black',
+        elevation:5,
+        paddingLeft:20,
+      },
+      box :   {
+        width:300,
+        height:180,
+        position:'absolute',
+        alignItems:'center',
+        paddingTop:15,
+        borderRadius:10,
+        shadowOffset: { height: 5, width: 1 }, 
+        shadowOpacity:1,
+        shadowRadius:20,
+        backgroundColor:'#fff',
+        shadowColor:'black',
+        elevation:15,
+      },
+      buttonadd_delete: {
+        height:"30%",
+        width:'35%',
+        position:'absolute',
+        bottom:30,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:10,
+        shadowOffset: { height: 5, width: 1 }, 
+        shadowOpacity:1,
+        shadowRadius:20,
+        backgroundColor:'white',
+        elevation:15,
+      }
+
+})
