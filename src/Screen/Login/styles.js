@@ -4,7 +4,7 @@ export const styles = StyleSheet.create(
         headerLogin: {
             width:'100%',
             flex:1.5,
-            justifyContent:'flex-end',
+            // justifyContent:'flex-end',
             alignItems:'center',
             justifyContent:'center'
         },
@@ -21,19 +21,23 @@ export const styles = StyleSheet.create(
             marginTop:20,
         },
         viewInput: {
-            width:'100%',
             marginTop:20,
             borderRadius:5,
             width:'90%',
+            zIndex:0,
         },
         iconInput:{
-            left:25,
-            zIndex:1,
+            position:'absolute',
+            left:3,
+            zIndex:2,
+            pointerEvents:'none',
         },
         IconSecurPass:{
+            position:'absolute',
             fontSize:23,
             height:23,
-            right:30,
+            right:15,
+            zIndex:2,
         },
         textInput: {
             borderBottomWidth:2,
@@ -55,16 +59,14 @@ export const styles = StyleSheet.create(
             width:'90%',
         },
         styleButtonLogin: {
-            width:'50%',
+            width:100,
             height:50,
             marginTop:50,
             margin:20,
-            shadowOffset: { height: 1, width: 1 }, 
-            shadowOpacity:1,
-            shadowRadius:20,
-            shadowColor:'black',
-            elevation:15,
-            borderRadius:40,
+            justifyContent:'center',
+            alignItems:'center',
+            borderRadius:20,
+            backgroundColor:'#67cfca',
           }
     }
 )

@@ -1,9 +1,14 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-unused-vars */
+
+
 import {View, Text, ImageBackground, TouchableOpacity, TextInput, Alert, Animated} from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
-import {styles} from './styles'
-import { validateEmail, validatePass } from './functionLogin';
+import {styles} from './styles';
+import { loginFirebaseAuth, validateEmail, validatePass } from './functionLogin';
+import { Icon } from 'react-native-elements';
 const LoginScreen = ({navigation}) => {
+
 
   const [loginAnimation,setloginAnimation] = useState(true);
   const [email, setemail] = useState('');
@@ -17,7 +22,7 @@ const LoginScreen = ({navigation}) => {
 
   const [validateEmailValue,setValidateEmailText] = useState('');
   const [validatePassValue,setvalidatePassText] = useState('');
-  
+
   const animation = useRef(new Animated.Value(-1)).current;
   useEffect(() => {
     Animated.timing(animation,{
@@ -34,7 +39,7 @@ const LoginScreen = ({navigation}) => {
     }}>
       <View style={{
           flex:1,
-          alignItems:'center'
+          alignItems:'center',
           }}>
           <View  style={styles.headerLogin}>
             <Animated.View style={{
@@ -51,9 +56,12 @@ const LoginScreen = ({navigation}) => {
               <View style={styles.viewInput}>
               <View style={{width:'100%',flexDirection:'row',alignItems:'center'}}>
               {/* icon */}
+              <View style={styles.iconInput}>
+               <Icon name='email' color={'black'}/>
+              </View>
               <TextInput
-               placeholder='Email'
-               keyboardType='email-address'
+               placeholder="Email"
+               keyboardType="email-address"
                placeholderTextColor={'#fff'}
                maxLength={20}
                style={{
@@ -65,8 +73,7 @@ const LoginScreen = ({navigation}) => {
                 validateEmail(text,setValidateEmailText,setvalidateColorEmail,setvalidateBorderEmail);
                 setemail(text);
                }}
-              >
-              </TextInput>
+               />
               </View>
                
               <Text style={{
@@ -76,11 +83,14 @@ const LoginScreen = ({navigation}) => {
                 }}>{validateEmailValue}</Text>
               </View>
 
-              <View style={styles.viewInput}> 
+              <View style={styles.viewInput}>
               <View style={{width:'100%',flexDirection:'row',alignItems:'center',borderRadius:10}}>
               {/* icon */}
+              <View style={styles.iconInput}>
+              <Icon name='lock' color={'black'} size={22}/>
+              </View>
               <TextInput
-               placeholder='PassWord'
+               placeholder="PassWord"
                maxLength={20}
                placeholderTextColor={'#fff'}
                secureTextEntry={securePass}
@@ -93,41 +103,45 @@ const LoginScreen = ({navigation}) => {
                 validatePass(text,setvalidatePassText,setvalidateColorPass,setvalidateBorderPass);
                 setpassWord(text);
                }}
-              >
-              </TextInput>
+               />
               {/* icon */}
+              <View style={styles.IconSecurPass}>
+                <Icon type='material' 
+                name={securePass?'visibility-off':'visibility'} size={25}
+                onPress={() => {
+                  console.log(validatePass(passWord,setvalidatePassText,setvalidateColorPass,setvalidateBorderPass))
+                  setsecurePass(!securePass);
+                }}
+                />
+              </View>
               </View>
               <Text style={{
                 ...styles.textValidate,
                 color:validateColorPass,
-                borderColor:validateColorPass
+                borderColor:validateColorPass,
               }}>{validatePassValue}</Text>
               </View>
 
 
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.styleButtonLogin}
                 onPress={() => {
-                  if(validatePass(passWord,setvalidatePassText,setvalidateColorPass,setvalidateBorderPass) &&
+                  if (validatePass(passWord,setvalidatePassText,setvalidateColorPass,setvalidateBorderPass) &&
                   validateEmail(email,setValidateEmailText,setvalidateColorEmail,setvalidateBorderEmail)
-                  )
-                  {
-                    navigation.navigate("tabBar")
-                  }
-                  // loginFirebaseAuth(email,passWord,navigation);
+                  ){loginFirebaseAuth(email,passWord,navigation);}
                 }}
                 >
                   <Text style={{
                     color:'#fff',
                     fontSize:20,
-                    fontWeight:'700'
+                    fontWeight:'700',
                   }}>
                     Login
                   </Text>
               </TouchableOpacity>
 
             </View>
-            
+
           </View>
 
         </View>
