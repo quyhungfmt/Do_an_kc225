@@ -6,12 +6,29 @@ import HomeScreen from '../Screen/Home/HomeScreen';
 import UserScreen from '../Screen/User/UserScreen';
 import { Icon } from 'react-native-elements';
 import { Alert, Text, View } from 'react-native';
-import SplashScreen from '../Screen/SplashScreen';
 import Team from '../Screen/User/Team';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Components/firebaseapp';
 
 const TabBar = ({navigation}) => {
-    React.useEffect( () =>
-    navigation.addListener('beforeRemove',(e) => {
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('List', jsonValue);
+    } catch (e) {
+    }
+  };
+  function LogOut() {
+    signOut(auth).then(() => {
+      console.log('done');
+      storeData([]);
+      navigation.navigate('Login');
+    }).catch((error) => {
+    });
+  }
+    React.useEffect( () =>{
+    const listen = navigation.addListener('beforeRemove',(e) => {
       e.preventDefault();
       Alert.alert(
         'ĐĂNG XUẤT?',
@@ -21,12 +38,16 @@ const TabBar = ({navigation}) => {
           {
             text: 'Yes',
             style: 'destructive',
-            onPress: () =>{},
+            onPress: () =>{
+              listen();
+              LogOut();
+            },
           },
         ]
       );
-    }),[]
-    );
+      return listen;
+    });
+  },[]);
  const tab = createBottomTabNavigator();
   const Icontab = ({icon,lable,focused}) => {
     return (
@@ -56,10 +77,10 @@ const TabBar = ({navigation}) => {
     })}
     >
         <tab.Screen name="Home" component={HomeScreen} options={{headerShown:false,tabBarIcon: ({focused}) => {
-          return <Icontab lable={'HOME'} icon={'home'} focused={focused}/>;
+          return <Icontab lable={'CONTROLS'} icon={'settings'} focused={focused}/>;
         }}}/>
         <tab.Screen name="Setting" component={UserScreen} options={{headerShown:false,tabBarIcon:({focused}) => {
-          return <Icontab lable={'SETTING'} icon={'storage'} focused={focused}/>;
+          return <Icontab lable={'LIST_DEVICES'} icon={'storage'} focused={focused}/>;
         }}}/>
         <tab.Screen name="TEAM" component={Team} options={{headerShown:false,tabBarIcon:({focused}) => {
           return <Icontab lable={'TEAM_02'} icon={'groups'} focused={focused}/>;

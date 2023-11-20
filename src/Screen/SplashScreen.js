@@ -7,62 +7,11 @@ import { View, ActivityIndicator, Image, Switch, Text, Button, FlatList, Touchab
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Components/firebaseapp';
-
-
-const colors = [
-  '#fff','#F9E79F','#85C1E9','#F8C471','#F5B7B1','#A9DFBF','#48C9B0',
-];
-const dsnhom = [
-  {id:'1', tentv:'NGUYỄN QUÝ HƯNG',mssv:'B2113188'},
-  {id:'2', tentv:'NGUYỄN TRƯỜNG GIANG',mssv:'B2106567'},
-  {id:'3', tentv:'NGUYỄN TIẾN THÀNH',mssv:'B2106596'},
-  {id:'4', tentv:'VÕ VĂN HUỆ',mssv:'B2100126'},
-  {id:'5', tentv:'BÙI THỊ HUỲNH NHƯ',mssv:'B2113297'},
-  {id:'6', tentv:'VÕ THANH SANG',mssv:'B2113201'},
-];
-const head = () => (
-  <View style={{
-      width:'100%',
-      height:70,
-      justifyContent:'center',
-      paddingLeft:10,
-  }}>
-      <Text style={{
-          color:'#fff',
-          fontSize:22,
-          fontWeight:'500',
-      }}>
-          Thành Viên Nhóm 2:
-      </Text>
-      <View style={{
-          flexDirection:'row',
-          borderBottomWidth:2,
-          
-      }}>
-          <Text style={{width:'18%',fontSize:20,fontWeight:'600'}}>STT</Text>
-          <Text style={{width:'55%',fontSize:20,fontWeight:'600'}}>Họ Tên</Text>
-          <Text style={{width:'20%',fontSize:20,fontWeight:'600'}}>MSSV</Text>
-      </View>
-  </View>
-);
-const Viewds = ({item}) => (
-  <View style={{
-      flexDirection:'row',
-      margin:5,
-      backgroundColor:colors[item.id],
-      borderRadius:10,
-      borderWidth:1,
-      borderColor:'#5DADE2',
-  }}>
-      <Text style={[styles.text,{width:'10%'}]}>{item.id}</Text>
-      <Text style={[styles.text,{width:'50%'}]}>{item.tentv}</Text>
-      <Text style={[styles.text,{width:'20%'}]}>{item.mssv}</Text>
-  </View>
-);
-
+import { ImageBackground } from 'react-native';
 
 const SplashScreen = ({navigation}) => {
     useEffect(() => {
+      setTimeout(() => {
         onAuthStateChanged(auth, (user) => {
           if (user) {
             navigation.navigate('tabBar');
@@ -72,36 +21,30 @@ const SplashScreen = ({navigation}) => {
             console.log('Người dùng chưa đăng nhập splass');
           }
         });
+      }, 2000);
       }, []);
 return (
   <View style={{
-      paddingTop:40,
       flex:1,
       justifyContent:'center',
       alignItems:'center'    ,
-      backgroundColor:'#5DADE2',
+      backgroundColor:'#afe0ef',
       }}>
-      <FlatList data={dsnhom} renderItem={Viewds} ListHeaderComponent={head}/>
-      <TouchableOpacity
-      onPress={() => {
-          navigation.navigate('Login');
-      }}
-      style={{
-          height:50,
-          width:100,
-          backgroundColor:'#189011',
-          borderRadius:20,
-          justifyContent:'center',
-          alignItems:'center',
-          bottom:5,
+      <ImageBackground
+        source={require('../../assets/0305-logo-ctu.png')}
+        style={{
+          width: 150,
+          height: 150,
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}
+        imageStyle={{ 
+          opacity: 0.5,
           borderWidth:1,
-          borderColor:'#BB05B9',
-      }}>
-          <Text style={styles.text}>
-              Next
-          </Text>
-          
-      </TouchableOpacity>
+          borderRadius:150,
+          borderColor:'blue'
+        }}
+      ></ImageBackground>
   </View>
 );
 };

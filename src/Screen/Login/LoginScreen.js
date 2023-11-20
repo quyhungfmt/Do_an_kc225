@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-unused-vars */
 
@@ -8,8 +9,10 @@ import {styles} from './styles';
 import { loginFirebaseAuth, validateEmail, validatePass } from './functionLogin';
 import { Icon } from 'react-native-elements';
 const LoginScreen = ({navigation}) => {
-
-
+  React.useEffect( () => navigation.addListener('beforeRemove',(e) => {
+      e.preventDefault();
+    }),[]);
+    
   const [loginAnimation,setloginAnimation] = useState(true);
   const [email, setemail] = useState('');
   const [passWord, setpassWord] = useState('');
@@ -22,8 +25,8 @@ const LoginScreen = ({navigation}) => {
 
   const [validateEmailValue,setValidateEmailText] = useState('');
   const [validatePassValue,setvalidatePassText] = useState('');
-
   const animation = useRef(new Animated.Value(-1)).current;
+  
   useEffect(() => {
     Animated.timing(animation,{
       toValue:1,
