@@ -28,7 +28,7 @@ return (
       flex:1,
       justifyContent:'center',
       alignItems:'center'    ,
-      backgroundColor:'#afe0ef',
+      backgroundColor:'#85d8f1',
       }}>
       <ImageBackground
         source={require('../../assets/0305-logo-ctu.png')}
@@ -37,12 +37,6 @@ return (
           height: 150,
           justifyContent: 'space-around',
           alignItems: 'center',
-        }}
-        imageStyle={{ 
-          opacity: 0.5,
-          borderWidth:1,
-          borderRadius:150,
-          borderColor:'blue'
         }}
       ></ImageBackground>
   </View>

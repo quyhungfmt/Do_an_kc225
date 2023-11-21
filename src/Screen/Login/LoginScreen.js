@@ -8,11 +8,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import {styles} from './styles';
 import { loginFirebaseAuth, validateEmail, validatePass } from './functionLogin';
 import { Icon } from 'react-native-elements';
+import { BackHandler } from 'react-native';
 const LoginScreen = ({navigation}) => {
-  React.useEffect( () => navigation.addListener('beforeRemove',(e) => {
-      e.preventDefault();
-    }),[]);
-    
+  BackHandler.addEventListener('hardwareBackPress', function () {
+    return true;
+  });
   const [loginAnimation,setloginAnimation] = useState(true);
   const [email, setemail] = useState('');
   const [passWord, setpassWord] = useState('');
@@ -78,7 +78,6 @@ const LoginScreen = ({navigation}) => {
                }}
                />
               </View>
-               
               <Text style={{
                 ...styles.textValidate,
                 color:validateColorEmail,

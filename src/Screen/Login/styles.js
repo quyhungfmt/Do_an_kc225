@@ -65,8 +65,11 @@ export const styles = StyleSheet.create(
             margin:20,
             justifyContent:'center',
             alignItems:'center',
-            borderRadius:20,
-            backgroundColor:'#67cfca',
+            backgroundColor:'gray',
+            borderBottomLeftRadius:30,
+            borderTopRightRadius:30,
+            borderWidth:2,
+            borderColor:"#fff",
           }
     }
 )
